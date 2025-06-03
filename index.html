@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Peak Useless</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      overflow: hidden;
+      background: repeating-conic-gradient(from 0deg, #ff00ff 0deg 10deg, #00ffff 10deg 20deg);
+      animation: migraine 0.2s infinite linear;
+      font-family: "Comic Sans MS", cursive;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: lime;
+    }
+
+    @keyframes migraine {
+      0% { background-position: 0 0; }
+      100% { background-position: 100% 100%; }
+    }
+
+    .container {
+      text-align: center;
+      border: 15px groove yellow;
+      padding: 40px;
+      border-radius: 30px;
+      background: rgba(0, 0, 0, 0.5);
+      box-shadow: 0 0 50px cyan;
+    }
+
+    #taunt {
+      margin-top: 20px;
+      font-size: 18px;
+      color: white;
+      min-height: 24px;
+    }
+
+    button {
+      padding: 15px 30px;
+      font-size: 24px;
+      background-color: red;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      position: absolute;
+      cursor: grab;
+      transition: top 0.2s, left 0.2s;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>You'll Never Click It</h1>
+    <p>This site is useless. So are you, for still trying.</p>
+    <div id="taunt">🤡</div>
+  </div>
+  <button id="runaway">Click Me</button>
+
+  <script>
+    const button = document.getElementById("runaway");
+    const taunt = document.getElementById("taunt");
+    const taunts = [
+      "Too slow!",
+      "You missed!",
+      "Are you okay?",
+      "Try harder.",
+      "Seriously?",
+      "Embarrassing.",
+      "😂😂😂",
+      "You thought...",
+      "Nope.",
+      "Why are you still here?"
+    ];
+
+    function moveButton() {
+      const x = Math.random() * (window.innerWidth - 100);
+      const y = Math.random() * (window.innerHeight - 50);
+      button.style.left = `${x}px`;
+      button.style.top = `${y}px`;
+      taunt.textContent = taunts[Math.floor(Math.random() * taunts.length)];
+    }
+
+    button.addEventListener("mouseover", moveButton);
+    moveButton(); // Initial placement
+  </script>
+</body>
+</html>
