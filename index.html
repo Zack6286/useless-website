@@ -3,89 +3,117 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Peak Useless</title>
+  <title>Useless Omega</title>
   <style>
-    body {
+    html, body {
       margin: 0;
-      height: 100vh;
-      overflow: hidden;
-      background: repeating-conic-gradient(from 0deg, #ff00ff 0deg 10deg, #00ffff 10deg 20deg);
-      animation: migraine 0.2s infinite linear;
+      padding: 0;
+      height: 100%;
+      background: conic-gradient(from 0deg, red, yellow, lime, cyan, blue, magenta, red);
+      animation: vortex 3s infinite linear;
       font-family: "Comic Sans MS", cursive;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      color: lime;
+      overflow: hidden;
+      user-select: none;
     }
 
-    @keyframes migraine {
-      0% { background-position: 0 0; }
-      100% { background-position: 100% 100%; }
+    @keyframes vortex {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
     }
 
-    .container {
-      text-align: center;
-      border: 15px groove yellow;
-      padding: 40px;
-      border-radius: 30px;
-      background: rgba(0, 0, 0, 0.5);
-      box-shadow: 0 0 50px cyan;
-    }
-
-    #taunt {
-      margin-top: 20px;
-      font-size: 18px;
-      color: white;
-      min-height: 24px;
-    }
-
-    button {
-      padding: 15px 30px;
-      font-size: 24px;
-      background-color: red;
-      color: white;
-      border: none;
-      border-radius: 10px;
+    .center {
       position: absolute;
-      cursor: grab;
-      transition: top 0.2s, left 0.2s;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      color: white;
+      background: rgba(0, 0, 0, 0.5);
+      padding: 30px;
+      border-radius: 20px;
+      border: 5px double pink;
+      z-index: 1;
+    }
+
+    #button {
+      position: absolute;
+      background-color: orangered;
+      color: white;
+      font-size: 20px;
+      border: none;
+      border-radius: 50%;
+      padding: 20px;
+      cursor: crosshair;
+      z-index: 2;
+      transition: all 0.2s ease-in-out;
+    }
+
+    #cryptic {
+      position: absolute;
+      top: 10%;
+      width: 100%;
+      text-align: center;
+      font-size: 18px;
+      color: lime;
+      z-index: 3;
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1>You'll Never Click It</h1>
-    <p>This site is useless. So are you, for still trying.</p>
-    <div id="taunt">🤡</div>
+  <div class="center">
+    <h1>🌀 You Have Entered the Useless Omega Zone</h1>
+    <p>There's nothing for you here.</p>
   </div>
-  <button id="runaway">Click Me</button>
+
+  <div id="cryptic">🧠</div>
+  <button id="button">Click Me</button>
+
+  <audio id="sigh" src="https://upload.wikimedia.org/wikipedia/commons/c/cc/Sigh.ogg"></audio>
 
   <script>
-    const button = document.getElementById("runaway");
-    const taunt = document.getElementById("taunt");
-    const taunts = [
-      "Too slow!",
-      "You missed!",
-      "Are you okay?",
-      "Try harder.",
-      "Seriously?",
-      "Embarrassing.",
-      "😂😂😂",
-      "You thought...",
-      "Nope.",
-      "Why are you still here?"
+    const button = document.getElementById("button");
+    const cryptic = document.getElementById("cryptic");
+    const sigh = document.getElementById("sigh");
+    const messages = [
+      "You shouldn't be here.",
+      "Nothing is real.",
+      "Stop trying.",
+      "Did you blink?",
+      "Your cursor is meaningless.",
+      "404: Purpose Not Found",
+      "You're wasting more than time.",
+      "This button is lying.",
+      "We warned you."
     ];
 
-    function moveButton() {
-      const x = Math.random() * (window.innerWidth - 100);
-      const y = Math.random() * (window.innerHeight - 50);
+    function moveAndShrink() {
+      const size = Math.random() * 60 + 20;
+      const x = Math.random() * (window.innerWidth - size);
+      const y = Math.random() * (window.innerHeight - size);
       button.style.left = `${x}px`;
       button.style.top = `${y}px`;
-      taunt.textContent = taunts[Math.floor(Math.random() * taunts.length)];
+      button.style.width = `${size}px`;
+      button.style.height = `${size}px`;
+      cryptic.textContent = messages[Math.floor(Math.random() * messages.length)];
+
+      // 20% chance of fake mouse freeze
+      if (Math.random() < 0.2) {
+        document.body.style.pointerEvents = "none";
+        setTimeout(() => {
+          document.body.style.pointerEvents = "auto";
+        }, 1500);
+      }
+
+      // Play sigh sound occasionally
+      if (Math.random() < 0.3) {
+        sigh.volume = 0.1;
+        sigh.play();
+      }
     }
 
-    button.addEventListener("mouseover", moveButton);
-    moveButton(); // Initial placement
+    button.addEventListener("mouseover", moveAndShrink);
+    moveAndShrink();
   </script>
 </body>
 </html>
+
